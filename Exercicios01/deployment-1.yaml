@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: nginx1
+  
+
+spec:
+  selector:
+    matchLabels:
+      app: proxy
+      webserver: nginx 
+      version: "1"
+  template:
+    metadata:
+      annotations:
+        description: "first deployment"
+      
+      labels:
+        app: proxy
+        webserver: nginx 
+        version: "1"
+    spec:
+      containers:
+      - name: nginx1
+        image: nginx:1.17.9
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 80

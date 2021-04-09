@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: nginx2
+  
+
+spec:
+  selector:
+    matchLabels:
+      app: proxy
+      webserver: nginx 
+      version: "2"
+  template:
+    metadata:
+      annotations:
+        description: "second deployment"
+
+      
+      labels:
+        app: proxy
+        webserver: nginx 
+        version: "2"
+    spec:
+      containers:
+      - name: nginx2
+        image: nginx:1.17.4
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 80
